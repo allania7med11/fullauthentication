@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-signup',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor() {}
+  constructor(private _userService: UserService) {}
   fields = [
     { type: 'text', name: 'username', placeholder: 'Username', icon: 'user' },
     { type: 'text', name: 'mail', placeholder: 'Email', icon: 'mail' },
@@ -23,5 +24,7 @@ export class SignupComponent implements OnInit {
       icon: 'lock-closed',
     },
   ];
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._userService.getUser().subscribe(data => console.log(data));
+  }
 }
